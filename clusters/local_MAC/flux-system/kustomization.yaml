@@ -21,8 +21,10 @@ patches:
                   subPath: ca-cert-PROXY.pem
                   readOnly: false
                 env:
+                  - name: "HTTP_PROXY"
+                    value: " http://10.206.107.139:8080"
                   - name: "HTTPS_PROXY"
-                    value: "http://10.206.103.25:8080/"
+                    value: " http://10.206.107.139:8080"
                   - name: "NO_PROXY"
                     value: ".cluster.local.,.cluster.local,.svc,10.96.0.1"
             volumes:
