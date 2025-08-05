@@ -1,0 +1,27 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: djjudas21
+spec:
+  interval: 1m0s
+  timeout: 1m0s
+  url: https://djjudas21.github.io/charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: lldap
+spec:
+  chart:
+    spec:
+      chart: lldap
+      sourceRef:
+        kind: HelmRepository
+        name: djjudas21
+      version: "*"
+  interval: 1m0s
+  driftDetection:
+    mode: enabled
+  valuesFrom:
+    - kind: ConfigMap
+      name: chart-values
