@@ -1,0 +1,24 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cert-manager-webhook-transip
+spec:
+  interval: 24h
+  url: https://demeester.dev/cert-manager-webhook-transip
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager-webhook-transip
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: cert-manager-webhook-transip
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: cert-manager-webhook-transip
+        namespace: cert-manager
+      interval: 12h
